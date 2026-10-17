@@ -3,405 +3,611 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INFINITE｜無限宇宙</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="INFINITE 無限宇宙：探索星球、挑戰謎題、發現知識，開啟你的宇宙冒險。">
+<title>INFINITE — 無限宇宙</title>
 <style>
-:root {
-  --bg:#080b18; --panel:#131a30; --text:#f4f5ff;
-  --muted:#a4accb; --purple:#a78bfa; --cyan:#67e8f9;
+:root{
+  --bg:#080b18;--panel:#11172b;--panel2:#171f38;
+  --text:#f4f5ff;--muted:#a5aecb;--cyan:#67e8f9;
+  --purple:#b9a2ff;--pink:#f0abfc;--line:#ffffff18;
 }
-* { box-sizing:border-box; }
-body {
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:system-ui,"Noto Sans TC",sans-serif;
-  min-height:100vh;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:system-ui,"Noto Sans TC",sans-serif;overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer;color:var(--text);background:#ffffff0b;
+border:1px solid var(--line);border-radius:12px;padding:11px 15px;
+transition:transform .2s,background .2s,border-color .2s}
+button:hover{background:#a78bfa25;border-color:#b9a2ff88}
+button:active{transform:scale(.97)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+button:disabled{opacity:.55;cursor:not-allowed}
+a{color:var(--cyan);text-decoration:none}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none}
+.aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;
+background:radial-gradient(ellipse at 10% 20%,#5527a62b,transparent 43%),
+radial-gradient(ellipse at 85% 65%,#07598528,transparent 43%)}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;
+align-items:center;gap:20px;padding:15px 6%;background:#080b18df;
+backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{font-weight:900;letter-spacing:3px;font-size:19px;white-space:nowrap}
+.logo span{color:var(--cyan)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{font-size:13px;color:var(--muted)}
+nav a:hover{color:var(--cyan)}
+main{width:min(1120px,92%);margin:auto}
+.hero{text-align:center;padding:76px 0 55px;position:relative}
+.eyebrow{font-size:11px;letter-spacing:5px;color:var(--cyan)}
+h1{font-size:clamp(42px,8vw,84px);line-height:1.16;letter-spacing:2px;margin:20px 0}
+.gradient{background:linear-gradient(95deg,#67e8f9,#c4b5fd,#f0abfc);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);line-height:1.9;max-width:600px;margin:0 auto}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.primary{background:linear-gradient(110deg,#7045e8,#4f46e5);border:0}
+.primary:hover{filter:brightness(1.16)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0}
+.metric,.panel,.card{background:linear-gradient(145deg,#171f39df,#101426ed);
+border:1px solid var(--line);border-radius:20px}
+.metric{text-align:center;padding:16px 8px}
+.metric strong{display:block;color:var(--cyan);font-size:25px;margin-bottom:4px}
+.metric span{font-size:12px;color:var(--muted)}
+section{margin:62px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:20px}
+h2{font-size:clamp(22px,4vw,30px);margin:0}
+h3{margin:0 0 10px}
+.muted,.section-head p{color:var(--muted);font-size:13px;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}
+.card{padding:22px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-5px);border-color:#a78bfa77}
+.planet{height:125px;display:grid;place-items:center;font-size:67px;
+cursor:pointer;filter:drop-shadow(0 0 18px #9f8bfa44);transition:transform .3s}
+.planet:hover{transform:scale(1.13) rotate(8deg)}
+.card p{font-size:14px;line-height:1.85;color:var(--muted)}
+.card button{margin-top:7px}
+.tag{display:inline-block;border:1px solid #ffffff20;border-radius:20px;
+padding:4px 9px;font-size:11px;color:var(--cyan);margin-bottom:12px}
+.locked{filter:grayscale(.8)}
+.locked .planet{opacity:.6}
+.panel{padding:25px}
+.bar{height:9px;background:#ffffff12;border-radius:20px;overflow:hidden;margin:14px 0}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));
+transition:width .35s}
+.mission{display:flex;align-items:center;gap:12px;padding:12px 0;
+border-bottom:1px solid var(--line)}
+.mission:last-child{border-bottom:0}
+.mission input{width:18px;height:18px;accent-color:#a78bfa}
+.mission label{flex:1;line-height:1.6}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}
+.badge{padding:18px 10px;text-align:center;border:1px solid var(--line);
+border-radius:16px;background:#ffffff05}
+.badge .emoji{font-size:31px;display:block;margin-bottom:8px}
+.badge strong{font-size:13px;display:block}
+.badge small{color:var(--muted);font-size:11px;display:block;margin-top:5px}
+.badge.locked{opacity:.42;filter:grayscale(1)}
+.question{font-size:18px;line-height:1.9}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:10px;margin:18px 0}
+.options button{text-align:left}
+.feedback{min-height:28px;line-height:1.8;color:var(--cyan);margin:12px 0}
+.idea{font-size:22px;line-height:1.8;color:var(--cyan);margin:20px 0}
+.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(45px,1fr));gap:9px;margin:18px 0}
+.memory-card{min-height:70px;font-size:27px;padding:6px}
+.memory-card.open{background:#67e8f921;border-color:#67e8f9aa}
+input[type=text]{width:100%;padding:13px;background:#080b18;
+border:1px solid var(--line);border-radius:12px;color:var(--text)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+padding:13px 19px;background:#202944;border:1px solid #ffffff30;
+border-radius:14px;display:none;z-index:30;max-width:90%;text-align:center}
+#modal{position:fixed;inset:0;background:#030611df;z-index:25;
+display:none;align-items:center;justify-content:center;padding:20px}
+#modal.show{display:flex}
+.modal-box{width:min(540px,100%);max-height:85vh;overflow:auto;
+padding:27px;background:#11172b;border:1px solid #ffffff2c;border-radius:24px}
+.modal-icon{text-align:center;font-size:65px;margin-bottom:12px}
+footer{text-align:center;padding:35px 15px;color:var(--muted);
+border-top:1px solid var(--line);font-size:12px;line-height:2}
+@media(max-width:650px){
+ header{align-items:flex-start;flex-direction:column;padding:14px 5%;gap:12px}
+ nav{gap:13px}
+ main{width:92%}
+ .hero{padding:50px 0 25px}
+ .metrics{grid-template-columns:repeat(2,1fr)}
+ .section-head{align-items:flex-start;flex-direction:column}
+ .panel{padding:18px}
+ .memory-card{min-height:57px}
 }
-body::before {
-  content:""; position:fixed; inset:0; z-index:-1;
-  background:
-    radial-gradient(ellipse at 15% 15%,#38276a66,transparent 45%),
-    radial-gradient(ellipse at 85% 65%,#07598555,transparent 40%),
-    #080b18;
-}
-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:20px 7%; border-bottom:1px solid #ffffff16;
-  position:sticky; top:0; background:#080b18dd;
-  backdrop-filter:blur(14px); z-index:5;
-}
-.logo {font-weight:900; letter-spacing:3px; color:var(--cyan);}
-nav {display:flex; gap:18px; flex-wrap:wrap;}
-a {color:var(--muted);text-decoration:none;}
-a:hover {color:var(--cyan);}
-main {max-width:1100px;margin:auto;padding:42px 22px 70px;}
-.hero {text-align:center;padding:55px 0 35px;}
-.eyebrow {color:var(--cyan);letter-spacing:4px;font-size:12px;}
-h1 {font-size:clamp(42px,8vw,82px);margin:15px 0;letter-spacing:2px;}
-.gradient {
-  background:linear-gradient(90deg,#67e8f9,#c4b5fd,#f0abfc);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.subtitle {color:var(--muted);line-height:1.9;max-width:600px;margin:0 auto;}
-.stats {display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:28px 0;}
-.stat {background:#ffffff09;border:1px solid #ffffff18;border-radius:15px;padding:13px 20px;}
-.stat strong {color:var(--cyan);font-size:21px;display:block;}
-.section-title {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:40px 0 18px;}
-h2 {font-size:23px;margin:0;}
-.muted {color:var(--muted);font-size:14px;}
-.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
-.card {
-  background:linear-gradient(145deg,#171f39e8,#101426e8);
-  border:1px solid #ffffff18;border-radius:22px;padding:22px;
-  transition:transform .2s,border-color .2s;min-width:0;
-}
-.card:hover {transform:translateY(-4px);border-color:#a78bfa88;}
-.planet {
-  height:125px;display:grid;place-items:center;font-size:70px;
-  cursor:pointer;filter:drop-shadow(0 0 18px #a78bfa44);
-  transition:transform .3s;
-}
-.planet:hover {transform:scale(1.12) rotate(8deg);}
-.card h3 {margin:8px 0;}
-.card p {color:var(--muted);font-size:14px;line-height:1.8;}
-button {
-  border:1px solid #ffffff24;background:#ffffff0c;color:var(--text);
-  padding:11px 16px;border-radius:12px;cursor:pointer;
-  font:inherit;transition:.2s;
-}
-button:hover {background:#a78bfa30;border-color:var(--purple);}
-.primary {background:linear-gradient(100deg,#7c3aed,#4f46e5);border:0;}
-.primary:hover {filter:brightness(1.15);}
-button:focus-visible,a:focus-visible {outline:2px solid var(--cyan);outline-offset:3px;}
-.progress {height:8px;background:#ffffff15;border-radius:10px;overflow:hidden;margin:12px 0;}
-.progress div {height:100%;width:0;background:linear-gradient(90deg,#67e8f9,#a78bfa);transition:width .3s;}
-.mission {display:flex;align-items:center;gap:12px;margin:12px 0;}
-.mission input {width:18px;height:18px;accent-color:#a78bfa;}
-.panel {background:#10172c;border:1px solid #ffffff1b;border-radius:22px;padding:24px;}
-.riddle-options {display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;}
-#feedback {min-height:28px;color:var(--cyan);margin-top:14px;}
-.game-grid {display:grid;grid-template-columns:repeat(4,minmax(45px,1fr));gap:9px;margin-top:18px;}
-.tile {font-size:25px;min-height:62px;padding:8px;}
-.tile.revealed {background:#67e8f920;border-color:#67e8f988;}
-.idea {font-size:24px;color:var(--cyan);padding:18px 0;line-height:1.7;}
-footer {text-align:center;padding:35px 15px;color:var(--muted);border-top:1px solid #ffffff16;font-size:13px;}
-#toast {position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-background:#202944;border:1px solid #ffffff2b;border-radius:12px;
-padding:12px 18px;display:none;z-index:10;max-width:90vw;text-align:center;}
-@media(max-width:600px) {
- header {padding:16px 5%;align-items:flex-start;gap:12px;flex-direction:column;}
- nav {gap:14px;font-size:13px;}
- main {padding:20px 15px 45px;}
- .hero {padding:38px 0 20px;}
- .section-title {align-items:flex-start;flex-direction:column;}
- .panel {padding:18px;}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
 </head>
 <body>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="aurora"></div>
+
 <header>
-  <div class="logo">✦ INFINITE</div>
-  <nav>
-    <a href="#worlds">探索世界</a>
-    <a href="#missions">每日任務</a>
-    <a href="#puzzle">解謎區</a>
-    <a href="#lab">創意實驗室</a>
+  <a class="logo" href="#home">✦ <span>INFINITE</span></a>
+  <nav aria-label="主導覽">
+    <a href="#universe">宇宙地圖</a>
+    <a href="#daily">每日任務</a>
+    <a href="#challenge">解謎挑戰</a>
+    <a href="#memory">記憶迷宮</a>
+    <a href="#achievements">成就收藏</a>
   </nav>
 </header>
 
-<main>
+<main id="home">
   <section class="hero">
-    <div class="eyebrow">YOUR UNIVERSE OF DISCOVERY</div>
-    <h1>世界沒有盡頭，<br><span class="gradient">好奇心也是。</span></h1>
-    <p class="subtitle">
-      歡迎來到無限宇宙。探索未知星球、挑戰邏輯謎題、
-      發現奇妙知識，讓每一次好奇都成為新的冒險。
-    </p>
-    <div class="stats">
-      <div class="stat">探索點數<strong id="xp">0 XP</strong></div>
-      <div class="stat">探索等級<strong id="level">Lv. 1</strong></div>
-      <div class="stat">已發現星球<strong id="found">0 / 4</strong></div>
+    <div class="eyebrow">A UNIVERSE WITHOUT LIMITS</div>
+    <h1>你的好奇心，<br><span class="gradient">就是宇宙的起點。</span></h1>
+    <p class="lead">穿越未知星球，破解隱藏謎題，發現令人驚訝的知識。
+    這裡沒有固定的終點，只有等待你發現的新可能。</p>
+    <div class="actions">
+      <button class="primary" onclick="document.querySelector('#universe').scrollIntoView({behavior:'smooth'})">開始探索 ✦</button>
+      <button onclick="dailyJump()">挑戰今日謎題 →</button>
     </div>
-    <button class="primary" onclick="document.querySelector('#worlds').scrollIntoView({behavior:'smooth'})">
-      開始宇宙探索 ↓
-    </button>
+    <div class="metrics">
+      <div class="metric"><strong id="xp">0</strong><span>探索經驗 XP</span></div>
+      <div class="metric"><strong id="level">1</strong><span>探索等級</span></div>
+      <div class="metric"><strong id="discoveries">0 / 5</strong><span>發現星球</span></div>
+      <div class="metric"><strong id="badgeCount">0</strong><span>解鎖徽章</span></div>
+    </div>
+    <p class="muted" id="welcome"></p>
   </section>
 
-  <section id="worlds">
-    <div class="section-title">
-      <h2>✦ 選擇你的目的地</h2>
-      <span class="muted">每個世界都有不同的驚喜</span>
+  <section id="universe">
+    <div class="section-head">
+      <div><h2>✦ 宇宙探索地圖</h2><p>點擊星球，看看未知世界藏著什麼。</p></div>
+      <span class="muted" id="mapStatus">等待第一次探索</span>
     </div>
-    <div class="grid">
-      <article class="card">
-        <div class="planet" onclick="explore(0)" role="button" tabindex="0" aria-label="探索數學星球">🪐</div>
-        <h3>01｜數學星球</h3>
-        <p>規律、推理與數字的宇宙。每個問題，都可能藏著意想不到的答案。</p>
-        <button onclick="explore(0)">進入星球 →</button>
-      </article>
-      <article class="card">
-        <div class="planet" onclick="explore(1)" role="button" tabindex="0" aria-label="探索謎題星球">🌌</div>
-        <h3>02｜謎題星球</h3>
-        <p>邏輯、觀察與思考。試著從不同角度，找出看似不可能的解答。</p>
-        <button onclick="explore(1)">進入星球 →</button>
-      </article>
-      <article class="card">
-        <div class="planet" onclick="explore(2)" role="button" tabindex="0" aria-label="探索知識星球">🔭</div>
-        <h3>03｜知識星球</h3>
-        <p>探索科學、自然與宇宙中的奇妙現象，讓知識連結成新的想法。</p>
-        <button onclick="explore(2)">進入星球 →</button>
-      </article>
-      <article class="card">
-        <div class="planet" onclick="explore(3)" role="button" tabindex="0" aria-label="探索記憶星球">🧠</div>
-        <h3>04｜記憶迷宮</h3>
-        <p>翻開神祕卡片，訓練觀察力與記憶力，看看你能找到多少配對。</p>
-        <button onclick="explore(3)">進入星球 →</button>
-      </article>
-    </div>
+    <div class="grid" id="worldGrid"></div>
   </section>
 
-  <section id="missions">
-    <div class="section-title">
-      <h2>🚀 今日探索任務</h2>
-      <span class="muted">依自己的步調完成即可</span>
+  <section id="daily">
+    <div class="section-head">
+      <div><h2>🚀 今日探索任務</h2><p>完成任務，累積你的探索經驗。</p></div>
+      <span class="muted" id="missionCount">0 / 3</span>
     </div>
     <div class="panel">
-      <div class="muted">完成任務可獲得探索點數</div>
-      <div class="progress"><div id="progress"></div></div>
-      <div id="progressText" class="muted">0 / 3 已完成</div>
-      <label class="mission"><input type="checkbox" id="m0" onchange="mission(0)"> 發現一個新的星球</label>
-      <label class="mission"><input type="checkbox" id="m1" onchange="mission(1)"> 解開一個邏輯問題</label>
-      <label class="mission"><input type="checkbox" id="m2" onchange="mission(2)"> 在創意實驗室產生新想法</label>
-      <button onclick="resetMissions()">重設今日任務</button>
+      <div class="bar"><div id="missionBar"></div></div>
+      <div id="missionList"></div>
+      <p class="muted">任務可以慢慢完成；不會因為休息或離開網站而扣分。</p>
     </div>
   </section>
 
-  <section id="puzzle">
-    <div class="section-title">
-      <h2>🔐 三扇門的謎題</h2>
-      <span class="muted">考驗你的邏輯</span>
+  <section id="challenge">
+    <div class="section-head">
+      <div><h2>🔐 今日智慧挑戰</h2><p>先思考，再選答案。錯誤也是發現線索的方法。</p></div>
+      <span class="tag" id="questionDay">每日挑戰</span>
     </div>
     <div class="panel">
-      <p>你面前有三扇門，只有一扇通往出口。門上寫著：</p>
-      <p>🚪 A：「出口在這扇門後。」</p>
-      <p>🚪 B：「出口不在 A 門後。」</p>
-      <p>🚪 C：「出口不在這扇門後。」</p>
-      <p>已知三句話之中<strong>只有一句是真的</strong>。出口在哪裡？</p>
-      <div class="riddle-options">
-        <button onclick="answer('A')">選擇 A 門</button>
-        <button onclick="answer('B')">選擇 B 門</button>
-        <button onclick="answer('C')">選擇 C 門</button>
+      <h3 id="questionTitle">今日謎題</h3>
+      <div class="question" id="questionText"></div>
+      <div class="options" id="questionOptions"></div>
+      <div class="feedback" id="questionFeedback" aria-live="polite"></div>
+      <button onclick="showHint()">💡 提示</button>
+      <button onclick="showExplanation()">查看解題思路</button>
+    </div>
+  </section>
+
+  <section id="memory">
+    <div class="section-head">
+      <div><h2>🧠 記憶迷宮</h2><p>翻開卡片，找到四組相同的符號。</p></div>
+      <span class="muted" id="memoryScore">找到 0 / 4 對</span>
+    </div>
+    <div class="panel">
+      <div class="memory-grid" id="memoryGrid"></div>
+      <p class="muted" id="memoryMessage" aria-live="polite">準備好後，翻開任意兩張卡片。</p>
+      <button class="primary" onclick="startMemory()">重新洗牌</button>
+    </div>
+  </section>
+
+  <section id="ideaLab">
+    <div class="section-head">
+      <div><h2>💡 創意實驗室</h2><p>把不同概念組合起來，產生自己的新發明。</p></div>
+    </div>
+    <div class="panel">
+      <span class="tag">IDEA GENERATOR</span>
+      <div class="idea" id="ideaText">如果科學遇上想像力，會誕生什麼？</div>
+      <div class="actions" style="justify-content:flex-start">
+        <button class="primary" onclick="generateIdea()">✨ 產生新點子</button>
+        <button onclick="copyIdea()">複製點子</button>
       </div>
-      <div id="feedback" aria-live="polite"></div>
-      <button id="showHint" onclick="hint()">給我一點提示</button>
-    </div>
-  </section>
-
-  <section id="lab">
-    <div class="section-title">
-      <h2>💡 創意實驗室</h2>
-      <span class="muted">把不相關的事物連結起來</span>
-    </div>
-    <div class="panel">
-      <p>點擊按鈕，隨機組合兩種概念，創造一個新發明或故事。</p>
-      <div class="idea" id="idea">如果把兩個看似無關的想法結合，會發生什麼事？</div>
-      <button class="primary" onclick="mixIdea()">✨ 產生新點子</button>
-      <button onclick="copyIdea()">複製點子</button>
+      <p class="muted">小提示：你可以把點子畫成草圖，或設計一個能測試它的實驗。</p>
     </div>
   </section>
 
   <section>
-    <div class="section-title"><h2>🌠 宇宙小知識</h2></div>
+    <div class="section-head">
+      <div><h2>🌌 宇宙知識庫</h2><p>三個值得繼續追問的科學問題。</p></div>
+    </div>
     <div class="grid">
       <article class="card">
-        <h3>🧊 水也能沸騰又結冰？</h3>
-        <p>在適當的低壓環境下，水可能同時出現沸騰與結冰現象，這和水的相圖及三相點有關。</p>
+        <span class="tag">數學</span>
+        <h3>無限也有大小之分？</h3>
+        <p>自然數可以與偶數一一配對；然而，康托爾證明實數集合無法與自然數集合一一配對。數學中的無限比直覺更奇妙。</p>
       </article>
       <article class="card">
-        <h3>♾️ 無限的大小也不同？</h3>
-        <p>自然數與偶數可以一一配對，因此它們一樣多；但實數的無限集合比自然數更大。</p>
+        <span class="tag">物理</span>
+        <h3>為什麼火箭會旋轉？</h3>
+        <p>當噴流帶走角動量時，依照角動量守恆與反作用的物理原理，火箭本體可能產生反向旋轉。這也是研究噴流方向的切入點。</p>
       </article>
       <article class="card">
-        <h3>🛰️ 太空人為何會飄浮？</h3>
-        <p>太空站與太空人一起繞地球持續自由落體，因此會呈現近似失重的漂浮狀態。</p>
+        <span class="tag">天文</span>
+        <h3>太空人為何會飄浮？</h3>
+        <p>太空人與太空站都在繞地球自由落體，因此呈現近似失重的狀態；不是因為太空中完全沒有重力。</p>
       </article>
     </div>
   </section>
 
+  <section id="achievements">
+    <div class="section-head">
+      <div><h2>🏆 成就與收藏</h2><p>每一枚徽章都記錄你曾經完成的探索。</p></div>
+      <button onclick="resetProgress()">重設本機紀錄</button>
+    </div>
+    <div class="badges" id="badgeGrid"></div>
+  </section>
+
   <section>
-    <div class="section-title"><h2>🏆 你的探索紀錄</h2></div>
     <div class="panel">
-      <p id="record">宇宙仍在等待你的第一個發現。</p>
-      <p class="muted">紀錄保存在目前使用的瀏覽器中。清除網站資料或更換裝置後，紀錄可能不會保留。</p>
-      <button onclick="clearProgress()">重新開始探索</button>
+      <h3>✍️ 個人探索筆記</h3>
+      <p class="muted">寫下你今天最感興趣的問題。筆記只會儲存在這個瀏覽器。</p>
+      <input id="noteInput" type="text" maxlength="300" placeholder="例如：為什麼噴流方向會影響物體的旋轉？">
+      <div class="actions" style="justify-content:flex-start">
+        <button class="primary" onclick="saveNote()">儲存筆記</button>
+        <button onclick="loadNote()">讀取筆記</button>
+      </div>
+      <p id="noteStatus" class="muted" aria-live="polite"></p>
     </div>
   </section>
 </main>
 
 <footer>
-  INFINITE UNIVERSE · 保持好奇，探索無限<br>
-  <span>你可以隨時休息，宇宙會一直在這裡。</span>
+  <div>✦ INFINITE UNIVERSE</div>
+  <div>保持好奇，勇敢提問，讓每個發現成為下一個問題的起點。</div>
+  <div>你的進度儲存在目前的瀏覽器中，不會自動同步到其他裝置。</div>
 </footer>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-icon" id="modalIcon">🪐</div>
+    <h2 id="modalTitle">星球名稱</h2>
+    <p id="modalText" style="line-height:1.9;color:var(--muted)"></p>
+    <div id="modalExtra"></div>
+    <div class="actions">
+      <button class="primary" onclick="closeModal()">繼續探索</button>
+    </div>
+  </div>
+</div>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const defaults = {
-  xp:0, found:[], missions:[false,false,false],
-  riddle:false, idea:false
-};
-let data;
-try {
-  data = {...defaults,...JSON.parse(localStorage.getItem('infiniteData') || '{}')};
-} catch {
-  data = {...defaults};
-}
-data.found = Array.isArray(data.found) ? data.found : [];
-data.missions = Array.isArray(data.missions) ? data.missions : [...defaults.missions];
+"use strict";
 
-const worlds = [
-  {name:'數學星球',text:'數學不只是計算。它也研究規律、結構，以及如何用嚴謹的推理解決問題。試著尋找生活中的數學模式！'},
-  {name:'謎題星球',text:'解謎時，先確認所有條件，再排除不可能的情況。好的推理不是猜測，而是讓每個結論都有理由。'},
-  {name:'知識星球',text:'科學從觀察開始，接著提出假說、設計公平的實驗，最後用證據檢查自己的想法。'},
-  {name:'記憶迷宮',text:'歡迎來到記憶迷宮！翻開卡片，找出相同圖案。每一對成功配對都能讓你獲得探索點數。'}
-];
-
-function save() {
-  try { localStorage.setItem('infiniteData',JSON.stringify(data)); }
-  catch { /* 瀏覽器若不允許儲存，網站仍可使用 */ }
-  render();
+/* ---------- 星空動畫 ---------- */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+let stars=[],W=0,H=0,raf=0;
+const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function resizeStars(){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  W=window.innerWidth;H=window.innerHeight;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+"px";canvas.style.height=H+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  stars=Array.from({length:Math.min(150,Math.floor(W*H/8000))},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()*1.5+.3,a:Math.random()*.7+.2,
+    speed:Math.random()*.008+.002
+  }));
 }
-function toast(message) {
-  const el=document.getElementById('toast');
-  el.textContent=message; el.style.display='block';
-  clearTimeout(toast.timer);
-  toast.timer=setTimeout(()=>el.style.display='none',2400);
-}
-function render() {
-  document.getElementById('xp').textContent=data.xp+' XP';
-  document.getElementById('level').textContent='Lv. '+(Math.floor(data.xp/50)+1);
-  document.getElementById('found').textContent=data.found.length+' / 4';
-  const done=data.missions.filter(Boolean).length;
-  document.getElementById('progress').style.width=(done/3*100)+'%';
-  document.getElementById('progressText').textContent=done+' / 3 已完成';
-  data.missions.forEach((v,i)=>document.getElementById('m'+i).checked=v);
-  document.getElementById('record').textContent=
-    '累積 '+data.xp+' 點探索經驗；發現 '+data.found.length+' 個星球；完成 '+done+' 項任務。';
-}
-function explore(index) {
-  if(!data.found.includes(index)) {
-    data.found.push(index); data.xp+=15;
-    toast('✨ 發現新世界！獲得 15 XP');
-  } else toast('🌌 '+worlds[index].name+'：'+worlds[index].text);
-  save();
-  if(index===3) startMemory();
-  else showWorld(index);
-}
-function showWorld(index) {
-  document.getElementById('feedback').textContent=worlds[index].text;
-  document.getElementById('puzzle').scrollIntoView({behavior:'smooth',block:'center'});
-}
-function mission(i) {
-  const box=document.getElementById('m'+i);
-  if(box.checked && !data.missions[i]) {
-    data.missions[i]=true; data.xp+=10; toast('任務完成！+10 XP');
-  } else if(!box.checked) {
-    data.missions[i]=false;
+function drawStars(){
+  ctx.clearRect(0,0,W,H);
+  for(const s of stars){
+    if(!reducedMotion)s.a+=s.speed*(Math.random()>.5?1:-1);
+    s.a=Math.max(.15,Math.min(.9,s.a));
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(210,225,255,"+s.a+")";ctx.fill();
   }
-  save();
+  if(!reducedMotion)raf=requestAnimationFrame(drawStars);
 }
-function resetMissions() {
-  data.missions=[false,false,false]; save();
-  toast('任務已重設。之前取得的點數會保留。');
+resizeStars();drawStars();
+window.addEventListener("resize",resizeStars);
+
+/* ---------- 本機進度 ---------- */
+const defaultState={
+  xp:0,found:[],missions:[],solved:[],memoryWon:[],ideaDays:[],
+  notes:"",riddleSolvedDays:[]
+};
+let state;
+try{
+  const saved=JSON.parse(localStorage.getItem("infiniteV2")||"null");
+  state={...defaultState,...(saved||{})};
+}catch(e){state={...defaultState};}
+for(const key of ["found","missions","solved","memoryWon","ideaDays","riddleSolvedDays"]){
+  if(!Array.isArray(state[key]))state[key]=[];
 }
-function answer(choice) {
-  const f=document.getElementById('feedback');
-  if(data.riddle) {
-    f.textContent='你已經解過這題，可以試著向別人說明推理過程！';
+if(!Number.isFinite(state.xp)||state.xp<0)state.xp=0;
+
+const today=new Date();
+const dayKey=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+const dailyMissions=[
+  {id:"discover",title:"發現一顆新星球",detail:"打開一個尚未探索的星球。"},
+  {id:"solve",title:"完成今日智慧挑戰",detail:"思考題目並找到正確答案。"},
+  {id:"create",title:"產生一個創意點子",detail:"在創意實驗室生成新想法。"}
+];
+const worlds=[
+  {id:"math",name:"數學星域",emoji:"🪐",kind:"探索中",desc:"規律、證明與數字的奇妙世界。試著找出日常生活中的數學結構。",extra:"探索任務：想一想，為什麼 1+3+5+…+(2n−1)=n²？你可以用圖形或代數證明。",unlock:0},
+  {id:"logic",name:"邏輯星域",emoji:"🌌",kind:"推理挑戰",desc:"每個線索都有意義。整理條件、排除矛盾，讓答案自己浮現。",extra:"探索任務：把一個問題拆成數種可能，再逐一檢查是否符合所有條件。",unlock:1},
+  {id:"science",name:"科學星域",emoji:"🔭",kind:"科學發現",desc:"從觀察到假說，再用公平的實驗檢驗想法。",extra:"探索任務：設計一個只改變一項變因、能重複測量的簡單實驗。",unlock:1},
+  {id:"memory",name:"記憶星域",emoji:"🧠",kind:"記憶遊戲",desc:"翻開卡片、尋找配對，練習觀察力與短期記憶。",extra:"準備好進入記憶迷宮了嗎？",unlock:2},
+  {id:"secret",name:"隱藏星域",emoji:"✨",kind:"隱藏世界",desc:"你發現了藏在星圖之外的秘密！",extra:"真正的探索者，會把每一次發現轉化成新的問題。繼續保持好奇心吧。",unlock:3}
+];
+function saveState(){
+  try{localStorage.setItem("infiniteV2",JSON.stringify(state));}
+  catch(e){notify("瀏覽器無法儲存進度，請檢查網站儲存設定。");}
+  renderAll();
+}
+function notify(msg){
+  const el=document.getElementById("toast");
+  el.textContent=msg;el.style.display="block";
+  clearTimeout(notify.timer);
+  notify.timer=setTimeout(()=>el.style.display="none",2400);
+}
+function hasMission(id){return state.missions.includes(dayKey+":"+id);}
+function completeMission(id){
+  const key=dayKey+":"+id;
+  if(state.missions.includes(key))return;
+  state.missions.push(key);
+  state.xp+=10;
+  notify("任務完成！獲得 10 XP");
+  saveState();
+}
+function renderAll(){
+  const level=Math.floor(state.xp/100)+1;
+  document.getElementById("xp").textContent=state.xp;
+  document.getElementById("level").textContent=level;
+  document.getElementById("discoveries").textContent=state.found.length+" / 5";
+  const unlockedBadges=getBadges().filter(b=>b.unlocked).length;
+  document.getElementById("badgeCount").textContent=unlockedBadges;
+  document.getElementById("welcome").textContent=
+    "等級 "+level+" · 距離下一級還差 "+(100-state.xp%100)+" XP · 你的探索隨時可以繼續。";
+  renderMissions();renderWorlds();renderBadges();
+}
+function renderMissions(){
+  const done=dailyMissions.filter(m=>hasMission(m.id)).length;
+  document.getElementById("missionCount").textContent=done+" / 3";
+  document.getElementById("missionBar").style.width=(done/3*100)+"%";
+  document.getElementById("missionList").innerHTML=dailyMissions.map(m=>
+    '<div class="mission"><span style="font-size:23px">'+(hasMission(m.id)?"✅":"◯")+
+    '</span><label><strong>'+m.title+'</strong><br><span class="muted">'+m.detail+
+    '</span></label><span class="muted">'+(hasMission(m.id)?"已完成":"+10 XP")+
+    '</span></div>'
+  ).join("");
+}
+function renderWorlds(){
+  const count=state.found.length;
+  document.getElementById("mapStatus").textContent=
+    count===5?"星圖已全部發現！": "已探索 "+count+" / 5 個星域";
+  document.getElementById("worldGrid").innerHTML=worlds.map((w,i)=>{
+    const unlocked=i<4||count>=3;
+    const found=state.found.includes(w.id);
+    return '<article class="card '+(!unlocked?"locked":"")+'">'+
+      '<div class="planet" role="button" tabindex="0" aria-label="探索'+w.name+
+      '" onclick="exploreWorld(\''+w.id+'\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();exploreWorld(\''+w.id+'\')}">'+
+      (unlocked?w.emoji:"🔒")+'</div>'+
+      '<span class="tag">'+(unlocked?(found?"已發現":w.kind):"尚未解鎖")+'</span>'+
+      '<h3>'+w.name+'</h3><p>'+ (unlocked?w.desc:"再發現 "+Math.max(0,3-count)+" 個星域，即可開啟這個隱藏世界。")+'</p>'+
+      '<button '+(!unlocked?"disabled":"")+' onclick="exploreWorld(\''+w.id+'\')">'+
+      (!unlocked?"尚未解鎖":found?"再次探索 →":"探索星球 →")+'</button></article>';
+  }).join("");
+}
+function exploreWorld(id){
+  const w=worlds.find(x=>x.id===id);
+  if(!w)return;
+  if(id==="secret"&&state.found.length<3){notify("先探索三個星域，再回來尋找隱藏世界！");return;}
+  if(!state.found.includes(id)){
+    state.found.push(id);state.xp+=20;
+    completeMission("discover");
+    notify("發現新星域！+20 XP");
+  }
+  if(id==="memory"){
+    saveState();showModal(w);document.getElementById("modalExtra").innerHTML=
+      '<button class="primary" onclick="closeModal();document.querySelector(\'#memory\').scrollIntoView({behavior:\'smooth\'})">開始記憶挑戰</button>';
     return;
   }
-  if(choice==='C') {
-    f.textContent='正確！出口在 C 門。此時 A、B 的敘述為假，C 的敘述為真。';
-    data.riddle=true; data.xp+=20;
-    data.missions[1]=true;
-    toast('🎉 解謎成功！+20 XP');
-    save();
-  } else {
-    f.textContent='還不對！請假設出口在你選的門後，逐句判斷三句話的真假。';
+  saveState();showModal(w);
+}
+function showModal(w){
+  document.getElementById("modalIcon").textContent=w.emoji;
+  document.getElementById("modalTitle").textContent=w.name;
+  document.getElementById("modalText").textContent=w.desc;
+  if(!document.getElementById("modalExtra").innerHTML)
+    document.getElementById("modalExtra").textContent=w.extra;
+  document.getElementById("modal").classList.add("show");
+  document.getElementById("modalExtra").innerHTML=
+    '<p class="muted">'+w.extra+'</p>';
+}
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+document.getElementById("modal").addEventListener("click",e=>{
+  if(e.target.id==="modal")closeModal();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeModal();
+});
+
+/* ---------- 每日謎題 ---------- */
+const questions=[
+  {title:"三扇門的真假",text:"A、B、C 三扇門只有一扇有出口。A 說「出口在 A 門」，B 說「出口不在 A 門」，C 說「出口不在 C 門」。三句話只有一句為真。出口在哪裡？",
+  opts:["A 門","B 門","C 門"],correct:2,
+  hint:"分別假設出口在 A、B、C，檢查三句話的真假。",
+  explain:"出口在 C 時，A 的敘述是假，B 的敘述是真，C 的敘述是假，恰好只有一句真話。"},
+  {title:"數字規律",text:"觀察數列：2、6、12、20、30、？下一個數字是多少？",
+  opts:["36","40","42","48"],correct:2,
+  hint:"試著將每一項寫成兩個連續整數的乘積。",
+  explain:"數列可寫成 1×2、2×3、3×4、4×5、5×6，因此下一項為 6×7=42。"},
+  {title:"繩子的長度",text:"一條繩子剪成三段，總共剪了幾刀？假設每一刀都能把一段分成兩段，且沒有把多段疊在一起剪。",
+  opts:["1 刀","2 刀","3 刀","4 刀"],correct:1,
+  hint:"每剪一刀，段數增加多少？",
+  explain:"一開始有一段，每剪一刀增加一段；從 1 段變成 3 段需要剪 2 刀。"},
+  {title:"正方形的秘密",text:"一個正方形邊長加倍，面積會變成原來的幾倍？",
+  opts:["2 倍","3 倍","4 倍","8 倍"],correct:2,
+  hint:"面積等於邊長乘以邊長。",
+  explain:"原面積為 s²，新面積為 (2s)²=4s²，所以變成 4 倍。"}
+];
+const dayNumber=Math.floor(Date.now()/86400000);
+const q=questions[((dayNumber%questions.length)+questions.length)%questions.length];
+document.getElementById("questionDay").textContent="每日挑戰 · "+(dayNumber%questions.length+1);
+document.getElementById("questionTitle").textContent=q.title;
+document.getElementById("questionText").textContent=q.text;
+document.getElementById("questionOptions").innerHTML=q.opts.map((o,i)=>
+  '<button onclick="answerQuestion('+i+')">'+String.fromCharCode(65+i)+'. '+o+'</button>'
+).join("");
+function dailyJump(){document.getElementById("challenge").scrollIntoView({behavior:"smooth"});}
+function answerQuestion(i){
+  const fb=document.getElementById("questionFeedback");
+  if(state.solved.includes(dayKey)){
+    fb.textContent="今日挑戰已完成！可以再看看解題思路，或探索其他星球。";return;
+  }
+  if(i===q.correct){
+    fb.textContent="🎉 正確！"+q.explain;
+    state.solved.push(dayKey);state.xp+=25;
+    completeMission("solve");saveState();
+    document.querySelectorAll("#questionOptions button").forEach(b=>b.disabled=true);
+    notify("解謎成功！獲得 25 XP");
+  }else{
+    fb.textContent="再想想！檢查每個條件，看看哪個選項能全部符合。";
   }
 }
-function hint() {
-  document.getElementById('feedback').textContent=
-    '提示：分別假設出口在 A、B、C，檢查每一種情況是否剛好只有一句真話。';
+function showHint(){
+  document.getElementById("questionFeedback").textContent="💡 提示："+q.hint;
 }
-const ideasA=['會記錄植物生長的','能幫忙整理書桌的','可以在雨天使用的','能提醒人休息的','能把數學變成遊戲的'];
-const ideasB=['迷你機器人','智慧盆栽','紙製裝置','互動桌遊','會說故事的燈'];
-let currentIdea='';
-function mixIdea() {
-  currentIdea='如果設計一個「'+ideasA[Math.floor(Math.random()*ideasA.length)]+
-    ideasB[Math.floor(Math.random()*ideasB.length)]+'」，它會如何運作？';
-  document.getElementById('idea').textContent=currentIdea;
-  if(!data.idea) {
-    data.idea=true; data.xp+=5; data.missions[2]=true; save();
-    toast('靈感啟動！+5 XP');
-  }
+function showExplanation(){
+  document.getElementById("questionFeedback").textContent="📘 解題思路："+q.explain;
 }
-async function copyIdea() {
-  if(!currentIdea) {toast('請先產生一個點子！');return;}
-  try {
-    await navigator.clipboard.writeText(currentIdea);
-    toast('點子已複製！');
-  } catch {
-    toast('請選取點子文字後手動複製。');
-  }
+if(state.solved.includes(dayKey)){
+  document.querySelectorAll("#questionOptions button").forEach(b=>b.disabled=true);
+  document.getElementById("questionFeedback").textContent="今日挑戰已完成！"+q.explain;
 }
-let memoryCards=[],first=null,locked=false,matches=0;
-function startMemory() {
-  const section=document.getElementById('lab');
-  let old=document.getElementById('memoryPanel');
-  if(old) old.remove();
-  const panel=document.createElement('div');
-  panel.id='memoryPanel'; panel.className='panel'; panel.style.marginTop='18px';
-  panel.innerHTML='<h3>🧠 記憶配對</h3><p class="muted">找出八張卡片中的四對相同圖案。</p><div class="game-grid" id="gameGrid"></div><p id="memoryStatus" aria-live="polite">找到所有配對吧！</p><button onclick="startMemory()">重新洗牌</button>';
-  section.appendChild(panel);
-  memoryCards=['🌙','🌙','⭐','⭐','🪐','🪐','🚀','🚀'].sort(()=>Math.random()-.5);
-  first=null;locked=false;matches=0;
-  const grid=document.getElementById('gameGrid'); grid.innerHTML='';
-  memoryCards.forEach((emoji,i)=>{
-    const b=document.createElement('button'); b.className='tile';
-    b.textContent='？'; b.setAttribute('aria-label','未翻開的卡片 '+(i+1));
-    b.onclick=()=>flipCard(i,b); grid.appendChild(b);
-  });
-  panel.scrollIntoView({behavior:'smooth',block:'center'});
+
+/* ---------- 記憶遊戲 ---------- */
+let memoryValues=[],firstCard=null,memoryLock=false,memoryPairs=0;
+let memoryMatched=[],memoryRun=0;
+function startMemory(){
+  const icons=["🌙","⭐","🪐","🚀"];
+  memoryValues=[...icons,...icons].sort(()=>Math.random()-.5);
+  firstCard=null;memoryLock=false;memoryPairs=0;memoryMatched=[];
+  memoryRun++;
+  document.getElementById("memoryScore").textContent="找到 0 / 4 對";
+  document.getElementById("memoryMessage").textContent="翻開兩張卡片，找出相同圖案。";
+  document.getElementById("memoryGrid").innerHTML=memoryValues.map((v,i)=>
+    '<button class="memory-card" aria-label="卡片 '+(i+1)+'" onclick="flipMemory('+i+',this)">？</button>'
+  ).join("");
 }
-function flipCard(i,b) {
-  if(locked || b.classList.contains('revealed') || b.dataset.done) return;
-  b.textContent=memoryCards[i]; b.classList.add('revealed');
-  if(first===null) {first={i,b};return;}
-  const prev=first; first=null;
-  if(memoryCards[prev.i]===memoryCards[i]) {
-    prev.b.dataset.done='1'; b.dataset.done='1'; matches++;
-    data.xp+=5;
-    document.getElementById('memoryStatus').textContent='配對成功！已找到 '+matches+' / 4 對。';
-    if(matches===4) {
-      data.xp+=10;
-      document.getElementById('memoryStatus').textContent='全部配對成功！額外獲得 10 XP！';
-      toast('記憶迷宮通關！');
+function flipMemory(i,btn){
+  if(memoryLock||memoryMatched.includes(i)||btn.classList.contains("open"))return;
+  btn.textContent=memoryValues[i];btn.classList.add("open");
+  if(firstCard===null){firstCard={i,btn};return;}
+  const first=firstCard;firstCard=null;
+  if(memoryValues[first.i]===memoryValues[i]){
+    memoryMatched.push(first.i,i);memoryPairs++;
+    document.getElementById("memoryScore").textContent="找到 "+memoryPairs+" / 4 對";
+    document.getElementById("memoryMessage").textContent="配對成功！繼續找下一對。";
+    state.xp+=5;
+    if(memoryPairs===4){
+      const key=dayKey;
+      if(!state.memoryWon.includes(key)){
+        state.memoryWon.push(key);state.xp+=20;
+        notify("記憶迷宮完成！額外獲得 20 XP");
+      }else notify("全部配對成功！");
+      document.getElementById("memoryMessage").textContent="🎉 全部配對成功！你完成了記憶迷宮。";
     }
-    save();
-  } else {
-    locked=true;
+    saveState();
+  }else{
+    memoryLock=true;
+    document.getElementById("memoryMessage").textContent="不一樣，再試一次！";
     setTimeout(()=>{
-      prev.b.textContent='？'; b.textContent='？';
-      prev.b.classList.remove('revealed'); b.classList.remove('revealed');
-      locked=false;
-    },750);
+      first.btn.textContent="？";btn.textContent="？";
+      first.btn.classList.remove("open");btn.classList.remove("open");
+      memoryLock=false;
+    },700);
   }
 }
-function clearProgress() {
-  if(!confirm('確定要清除這個瀏覽器中的探索紀錄嗎？')) return;
-  data={...defaults,found:[],missions:[false,false,false]};
-  save(); toast('紀錄已重設，新的旅程開始了。');
+startMemory();
+
+/* ---------- 創意實驗室 ---------- */
+const ideaA=["能觀察植物生長的","會幫忙整理書桌的","能提醒人休息的","可以節省用水的","能讓數學變有趣的","可以探索海洋的"];
+const ideaB=["迷你機器人","智慧盆栽","紙製裝置","互動桌遊","太陽能小車","科學探索箱"];
+let currentIdea="";
+function generateIdea(){
+  currentIdea="如果設計一個「"+ideaA[Math.floor(Math.random()*ideaA.length)]+
+  ideaB[Math.floor(Math.random()*ideaB.length)]+"」，它會如何運作？";
+  document.getElementById("ideaText").textContent=currentIdea;
+  completeMission("create");
+  const key=dayKey;
+  if(!state.ideaDays.includes(key)){
+    state.ideaDays.push(key);state.xp+=5;saveState();
+    notify("靈感已啟動！+5 XP");
+  }
 }
-render();
+async function copyIdea(){
+  if(!currentIdea){notify("先產生一個點子吧！");return;}
+  try{
+    await navigator.clipboard.writeText(currentIdea);
+    notify("點子已複製！");
+  }catch(e){
+    notify("無法自動複製，請手動選取點子文字。");
+  }
+}
+
+/* ---------- 成就系統 ---------- */
+function getBadges(){
+  return [
+    {id:"first",emoji:"🌟",name:"第一道星光",desc:"發現第一個星域",unlocked:state.found.length>=1},
+    {id:"explorer",emoji:"🪐",name:"宇宙旅人",desc:"發現三個星域",unlocked:state.found.length>=3},
+    {id:"secret",emoji:"✨",name:"秘密發現者",desc:"發現隱藏星域",unlocked:state.found.includes("secret")},
+    {id:"solver",emoji:"🔐",name:"解謎專家",desc:"完成一次每日挑戰",unlocked:state.solved.length>=1},
+    {id:"thinker",emoji:"💡",name:"創意啟動者",desc:"產生一個新點子",unlocked:state.ideaDays.length>=1},
+    {id:"memory",emoji:"🧠",name:"記憶大師",desc:"完成記憶迷宮",unlocked:state.memoryWon.length>=1},
+    {id:"century",emoji:"🏆",name:"百點探索家",desc:"累積 100 XP",unlocked:state.xp>=100},
+    {id:"master",emoji:"👑",name:"無限探索者",desc:"累積 500 XP",unlocked:state.xp>=500}
+  ];
+}
+function renderBadges(){
+  document.getElementById("badgeGrid").innerHTML=getBadges().map(b=>
+    '<div class="badge '+(!b.unlocked?"locked":"")+'"><span class="emoji">'+b.emoji+
+    '</span><strong>'+b.name+'</strong><small>'+b.desc+'</small><small>'+
+    (b.unlocked?"✓ 已解鎖":"尚未解鎖")+'</small></div>'
+  ).join("");
+}
+
+/* ---------- 探索筆記與重設 ---------- */
+function saveNote(){
+  state.notes=document.getElementById("noteInput").value.slice(0,300);
+  saveState();
+  document.getElementById("noteStatus").textContent="筆記已儲存在這個瀏覽器。";
+}
+function loadNote(){
+  document.getElementById("noteInput").value=state.notes||"";
+  document.getElementById("noteStatus").textContent=state.notes?"已載入先前的筆記。":"目前沒有儲存的筆記。";
+}
+function resetProgress(){
+  if(!confirm("確定要清除這個瀏覽器中的探索進度、點數與收藏嗎？此操作無法復原。"))return;
+  state={...defaultState,found:[],missions:[],solved:[],memoryWon:[],ideaDays:[],riddleSolvedDays:[]};
+  saveState();startMemory();
+  document.getElementById("questionFeedback").textContent="";
+  document.querySelectorAll("#questionOptions button").forEach(b=>b.disabled=false);
+  document.getElementById("noteInput").value="";
+  document.getElementById("noteStatus").textContent="";
+  notify("紀錄已重設，歡迎開始新的探索。");
+}
+loadNote();
+renderAll();
 </script>
 </body>
 </html>
